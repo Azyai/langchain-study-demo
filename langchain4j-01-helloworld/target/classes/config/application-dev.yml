@@ -1,0 +1,28 @@
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+logging:
+  level:
+    dev:
+      langchain4j: DEBUG
+
+langchain4j:
+  community:
+    dashscope:
+      streaming-chat-model:
+        api-key: ${aliQwen-api}
+        model-name: qwen3-max
+
+spring:
+  data:
+    redis:
+      host: 192.168.14.128
+      port: 6379
+      password: 123456
+      database: 0
+      connect-timeout: 3s
+      timeout: 3s

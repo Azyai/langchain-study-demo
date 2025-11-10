@@ -13,6 +13,7 @@ import dev.langchain4j.service.tool.ToolProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class MCPConfig {
 
     @Bean
+    @Primary
     public McpTransport stdioMcpTransport() {
         return new StdioMcpTransport.Builder()
                 .command(List.of("cmd", "/c", "npx", "-y", "@baidumap/mcp-server-baidu-map"))
@@ -37,20 +39,20 @@ public class MCPConfig {
                 .build();
     }
 
-//    @Bean
-//    public McpClient mcpClient(McpTransport stdioMcpTransport) {
-//        return new DefaultMcpClient.Builder()
-//                .transport(stdioMcpTransport)
-//                .build();
-//    }
-
     @Bean
-    public McpClient mcpClient(@Qualifier("streamableHttpMcpTransport")
-                                   McpTransport streamableHttpMcpTransport) {
+    public McpClient mcpClient(McpTransport stdioMcpTransport) {
         return new DefaultMcpClient.Builder()
-                .transport(streamableHttpMcpTransport)
+                .transport(stdioMcpTransport)
                 .build();
     }
+
+//    @Bean
+//    public McpClient mcpClient(@Qualifier("streamableHttpMcpTransport")
+//                                   McpTransport streamableHttpMcpTransport) {
+//        return new DefaultMcpClient.Builder()
+//                .transport(streamableHttpMcpTransport)
+//                .build();
+//    }
 
     @Bean(name = "mcpToolProvider")
     public ToolProvider mcpToolProvider(McpClient mcpClient) {

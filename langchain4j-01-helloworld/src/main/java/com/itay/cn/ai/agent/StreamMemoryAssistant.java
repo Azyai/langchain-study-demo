@@ -14,7 +14,7 @@ public interface StreamMemoryAssistant {
 
     String chat(String prompt);
 
-    String chatWithChatMemory(@MemoryId Long userId, @UserMessage String prompt);
+    // String chatWithChatMemory(@MemoryId Long userId, @UserMessage String prompt);
 
     Flux<String> chatFlux(@MemoryId Long userId, @UserMessage String prompt);
 }

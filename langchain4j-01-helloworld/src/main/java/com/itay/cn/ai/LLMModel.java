@@ -86,6 +86,7 @@ public class LLMModel {
                 .httpClientBuilder(new SpringRestClientBuilder())
                 .logRequests(true)
                 .logResponses(true)
+                .timeout(Duration.ofSeconds(6000))
                 .build();
     }
 
